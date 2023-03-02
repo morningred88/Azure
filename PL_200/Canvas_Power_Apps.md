@@ -1,65 +1,62 @@
-# 2 Canvas Power Apps
+# 3 Model-Driven Apps
 
-## 2.1   Add new environment
+## 3.1   Create model-drive app
 
-Setting> Admin center> click **Environment** on the left hand side> click **+New** on the top > You can configure the new environment:
+PowerApps home page> Apps tab> select Model-drive > Give an app name, all others leave default> create app
 
-- Name
+Then go to setting > choose classic designer
 
-- Type: Production, developer, sandbox, trial
+Component is classic designer: 
 
-  If you choose developer, then a database is automatically created in the environment. 
+- Area
 
-## 2.2   Create database table 
+- Group: Heading
 
-Powerapps home page > Tables tab on the left> +New> You can add table display name (singular) and primary column name.
+- Subarea: each page
 
-**Note:** 
+## 3.2   Add a chart
 
-Difference between primary column and primary key in a database table:
-Primary key needs to be unique in  a database table, but primary column not. 
+There are 3 ways to add a chart: 
 
+- From table
+- From app designer
+- From app: Show chart tab> click 3 dots> click new, to add a chart
 
+## 2.3   Report options
 
-After that, go to Tables tab again>selected the created table> click column, add all other columns
+- Chart
+- Import Power BI tile
+- Create report using RDL
 
-## 2.3   Import sample data
+## 2.4 Create RDL report
 
-### 2.3.1 Import from excel
+select the application> click on 3 dots besides the app name> Edit> Add page>Dataverse table >Next>Enter report, select report table> Save and publish
 
-Go to the created table > Import tab on the top> Import data in excel, you can add data from excel or CSV file in this way. After you upload the sample excel file, you need to do the column mapping. Then save and import data.
+Refresh the application> Go to Reports page> click new> Then click report wizard>Start new report>Give report name> primary record type: table used for report> select view> Next,  lay out Fields, you can add groups or columns from the table>Next, Fromat report, you can choose table, chart or both>Next, report summary > Finish
 
-## 2.4 Add relationship 
+## 2.4 Add command bar
 
-Inside a table, add a relationship to another table. This will add a column, please name column as **XXX Lookup**
+Each site has a form and a view pages.
 
-## 2.5 Edit in excel
+Go to the site, select Edit command bar from the site> select where to add> either main grid> next, you can see all the command.
 
-Select the table you want to edit > Edit tab on the top, choose **Edit data in excel** from drop down> Sign in to add add-in to allow to edit in excel, just for the first time > Click enable editing, all the data appear.
+Click new > select command, this will add a button> choose Power Fx langugage> The library will be installed for the first time.
 
-After you edit the column, then you need click **publish** to submit the data in PowerApps environment. 
+Click new > select drop down, this will add a drop down list
 
-### 2.5.2 How to edit checkup column
+After you save and publish, you will see a button on the top of the page, with the label as NewCommand. Of course, you can change the label in the command editor page. 
 
-The checkup column is the column created when you create a relationship between 2 tables. 
+### 2.4.1 Command action
 
-To enter the data for it, you put the mouse to the column, you will see the data from the related table shows up on the right hand side. We need to select the GUID number, not type the actual data, because excel can only recognize GUID. Each GUID is unique. You can not copy paste the GUID, please select it for each column. 
+#### 2.4.1.1 Notify()
 
-If you type a text on the checkup column, you cannot see any data from the system created checkup column. After edit, you can check the data in the system created checkup column and see if it is correct. 
+```
+Notify("Hello " & Self.Selected.Item.'Pet Owner Name', NotificationType.Information)
+```
 
-After publish the update, the actual data in the checkup table is visible, you will not see GUID like in excel. The data type is not text, if you click it, a card is showed up. 
+#### 2.4.1.2 Confirm() and if statement
 
-## 2.6 Create canvas app
-
-On the PowerApps home page> select **Create** tab on the left hand side>select from **Dataverse**> click the dataverse, all tables appear> choose the table you wish> click connect, a CRUD canvas app will be created
-
-You can use preview (play) button to test the actual app.
-
-For editing the app, hold on alt key, then click the button or arrow to navigate the page.
-
-## 2.7 App checker
-
-App checker is for canvas app only. 
-
-Solution checker is used for model-driven apps. 
+```
+If(Confirm("Do you want to go back to the list?", {Title:"What do you want to do?"}), Navigate('Pet Owners'), Launch("http://www.microsoft.com"))
+```
 
